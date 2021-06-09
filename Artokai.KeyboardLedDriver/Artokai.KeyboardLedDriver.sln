@@ -3,8 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artokai.KeyboardLedDriver", "Artokai.KeyboardLedDriver.csproj", "{84C53444-5F70-4ED1-921F-909036A52CEF}"
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Common", "..\KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj", "{AC6B99B4-99F1-43E1-968E-8580274B9D1D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artokai.KeyboardLedDriver", "..\KeyboardLedDriver.Logitech\Artokai.KeyboardLedDriver.csproj", "{862BEA9D-F47F-4390-994D-DA2C08D2113D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{84C53444-5F70-4ED1-921F-909036A52CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84C53444-5F70-4ED1-921F-909036A52CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84C53444-5F70-4ED1-921F-909036A52CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84C53444-5F70-4ED1-921F-909036A52CEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862BEA9D-F47F-4390-994D-DA2C08D2113D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{862BEA9D-F47F-4390-994D-DA2C08D2113D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{862BEA9D-F47F-4390-994D-DA2C08D2113D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{862BEA9D-F47F-4390-994D-DA2C08D2113D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
