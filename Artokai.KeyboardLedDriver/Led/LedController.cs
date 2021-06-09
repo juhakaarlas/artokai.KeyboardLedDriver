@@ -1,9 +1,10 @@
 ﻿using LedCSharp;
 using System;
+using KeyboardLedDriver.Common;
 
 namespace Artokai.KeyboardLedDriver.Led
 {
-    public class LedController : IDisposable
+    public class LedController : IDisposable, ILedController
     {
         private readonly keyboardNames[] ALERT_KEYS = {
             keyboardNames.ESC,

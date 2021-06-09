@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artokai.KeyboardLedDriver", "Artokai.KeyboardLedDriver.csproj", "{84C53444-5F70-4ED1-921F-909036A52CEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Common", "..\KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj", "{AC6B99B4-99F1-43E1-968E-8580274B9D1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
