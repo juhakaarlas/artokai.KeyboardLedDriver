@@ -19,6 +19,11 @@ namespace Artokai.KeyboardLedDriver
         public bool IsRunning { get; private set; }
         private ColorScheme DesiredScheme = ColorScheme.Default;
         private bool ShowAlert = false;
+        private ILedController _ledController;
+        public Worker(ILedController ledController)
+        {
+            _ledController = ledController;
+        }
 
         public void Run()
         {
@@ -28,18 +33,18 @@ namespace Artokai.KeyboardLedDriver
 
             bool isLGHUBAgentRunning = WaitForLGHUBAgent();
             if (isLGHUBAgentRunning) {
-                using var controller = new LogitechLedController();
+                
                 while (!cts.IsCancellationRequested)
                 {
-                    if (!controller.IsInitialized)
-                        controller.Initialize();
+                    if (!_ledController.IsInitialized)
+                        _ledController.Initialize();
 
-                    if (controller.IsInitialized)
-                        OnTick(controller);
+                    if (_ledController.IsInitialized)
+                        OnTick(_ledController);
 
                     Task.Delay(TimeSpan.FromSeconds(1), cts.Token).Wait();
                 }
-                controller.ShutDown();
+                _ledController.ShutDown();
             }
             IsRunning = false;
         }
@@ -70,12 +75,12 @@ namespace Artokai.KeyboardLedDriver
             return lghubAgentRunning;
         }
 
-        private void OnTick(ILedController controller)
+        private void OnTick(ILedController _ledController)
         {
             // Toggle the leds if necessary
-            if (DesiredScheme != controller.CurrentColorScheme || ShowAlert != controller.CurrentAlertState)
+            if (DesiredScheme != _ledController.CurrentColorScheme || ShowAlert != _ledController.CurrentAlertState)
             {
-                controller.SetColorScheme(DesiredScheme, ShowAlert);
+                _ledController.SetColorScheme(DesiredScheme, ShowAlert);
             }
 
             // Check VPN status every 30 seconds (also triggered when network changes)

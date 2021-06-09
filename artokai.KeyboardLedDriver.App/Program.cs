@@ -18,8 +18,12 @@ namespace Artokai.KeyboardLedDriver
 
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
             NetworkChange.NetworkAddressChanged += NetworkAddressChanged;
-            worker = new Worker();
-            worker.Run();
+
+            using (var controller = new Logitech.LogitechLedController())
+            {
+                worker = new Worker(controller);
+                worker.Run(); 
+            }
         }
 
         private static void NetworkAddressChanged(object sender, EventArgs e)
