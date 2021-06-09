@@ -1,4 +1,6 @@
-﻿namespace KeyboardLedDriver.Common
+﻿using System;
+
+namespace KeyboardLedDriver.Common
 {
     public interface ILedController
     {
