@@ -4,7 +4,7 @@ using KeyboardLedDriver.Common;
 
 namespace Artokai.KeyboardLedDriver.Led
 {
-    public class LedController : IDisposable, ILedController
+    public class LogitechLedController : IDisposable, ILedController
     {
         private readonly keyboardNames[] ALERT_KEYS = {
             keyboardNames.ESC,
@@ -95,7 +95,7 @@ namespace Artokai.KeyboardLedDriver.Led
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        ~LedController()
+        ~LogitechLedController()
         {
             Dispose(false);
         }
