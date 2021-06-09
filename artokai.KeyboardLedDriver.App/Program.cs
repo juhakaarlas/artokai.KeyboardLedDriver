@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net.NetworkInformation;
-using Artokai.KeyboardLedDriver.Led;
 using Microsoft.Extensions.Configuration;
 
 namespace Artokai.KeyboardLedDriver

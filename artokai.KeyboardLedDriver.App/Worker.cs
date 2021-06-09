@@ -1,4 +1,4 @@
-﻿using Artokai.KeyboardLedDriver.Led;
+﻿using Artokai.KeyboardLedDriver.Logitech;
 using KeyboardLedDriver.Common;
 using System;
 using System.Diagnostics;
@@ -28,7 +28,7 @@ namespace Artokai.KeyboardLedDriver
 
             bool isLGHUBAgentRunning = WaitForLGHUBAgent();
             if (isLGHUBAgentRunning) {
-                using var controller = new LedController();
+                using var controller = new LogitechLedController();
                 while (!cts.IsCancellationRequested)
                 {
                     if (!controller.IsInitialized)
@@ -70,7 +70,7 @@ namespace Artokai.KeyboardLedDriver
             return lghubAgentRunning;
         }
 
-        private void OnTick(LedController controller)
+        private void OnTick(ILedController controller)
         {
             // Toggle the leds if necessary
             if (DesiredScheme != controller.CurrentColorScheme || ShowAlert != controller.CurrentAlertState)
