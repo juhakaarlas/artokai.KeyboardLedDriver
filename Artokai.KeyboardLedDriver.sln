@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Common", "..\KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj", "{AC6B99B4-99F1-43E1-968E-8580274B9D1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Common", "KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj", "{AC6B99B4-99F1-43E1-968E-8580274B9D1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Logitech", "..\KeyboardLedDriver.Logitech\KeyboardLedDriver.Logitech.csproj", "{862BEA9D-F47F-4390-994D-DA2C08D2113D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Logitech", "KeyboardLedDriver.Logitech\KeyboardLedDriver.Logitech.csproj", "{862BEA9D-F47F-4390-994D-DA2C08D2113D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboarLedDriver.Corsair", "..\KeyboarLedDriver.Corsair\KeyboarLedDriver.Corsair.csproj", "{322648B4-6263-4087-9A38-E2EB6091F192}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardLedDriver.App", "..\artokai.KeyboardLedDriver.App\KeyboardLedDriver.App.csproj", "{C98D5E54-B4E7-4B2F-ACE5-BF5E9F1F0C29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboarLedDriver.Corsair", "KeyboarLedDriver.Corsair\KeyboarLedDriver.Corsair.csproj", "{322648B4-6263-4087-9A38-E2EB6091F192}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C98D5E54-B4E7-4B2F-ACE5-BF5E9F1F0C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C98D5E54-B4E7-4B2F-ACE5-BF5E9F1F0C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C98D5E54-B4E7-4B2F-ACE5-BF5E9F1F0C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C98D5E54-B4E7-4B2F-ACE5-BF5E9F1F0C29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
