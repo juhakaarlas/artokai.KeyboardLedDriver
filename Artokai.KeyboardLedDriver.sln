@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Logitech"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboarLedDriver.Corsair", "KeyboarLedDriver.Corsair\KeyboarLedDriver.Corsair.csproj", "{322648B4-6263-4087-9A38-E2EB6091F192}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.App", "artokai.KeyboardLedDriver.App\KeyboardLedDriver.App.csproj", "{C7621369-054E-4FA6-A83B-61407480C2D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7621369-054E-4FA6-A83B-61407480C2D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7621369-054E-4FA6-A83B-61407480C2D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7621369-054E-4FA6-A83B-61407480C2D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7621369-054E-4FA6-A83B-61407480C2D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
