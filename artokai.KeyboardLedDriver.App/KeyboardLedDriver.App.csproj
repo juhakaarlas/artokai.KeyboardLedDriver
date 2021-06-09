@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;Corsair.Debug</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj" />
-    <ProjectReference Include="..\KeyboardLedDriver.Logitech\KeyboardLedDriver.Logitech.csproj" />
+    <ProjectReference Include="..\KeyboarLedDriver.Corsair\KeyboarLedDriver.Corsair.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,22 +13,30 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.App", "ar
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Corsair.Debug|Any CPU = Corsair.Debug|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Corsair.Debug|Any CPU.ActiveCfg = Corsair.Debug|Any CPU
+		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Corsair.Debug|Any CPU.Build.0 = Corsair.Debug|Any CPU
 		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC6B99B4-99F1-43E1-968E-8580274B9D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862BEA9D-F47F-4390-994D-DA2C08D2113D}.Corsair.Debug|Any CPU.ActiveCfg = Corsair.Debug|Any CPU
 		{862BEA9D-F47F-4390-994D-DA2C08D2113D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{862BEA9D-F47F-4390-994D-DA2C08D2113D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{862BEA9D-F47F-4390-994D-DA2C08D2113D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{862BEA9D-F47F-4390-994D-DA2C08D2113D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{322648B4-6263-4087-9A38-E2EB6091F192}.Corsair.Debug|Any CPU.ActiveCfg = Corsair.Debug|Any CPU
+		{322648B4-6263-4087-9A38-E2EB6091F192}.Corsair.Debug|Any CPU.Build.0 = Corsair.Debug|Any CPU
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{322648B4-6263-4087-9A38-E2EB6091F192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7621369-054E-4FA6-A83B-61407480C2D1}.Corsair.Debug|Any CPU.ActiveCfg = Corsair.Debug|Any CPU
+		{C7621369-054E-4FA6-A83B-61407480C2D1}.Corsair.Debug|Any CPU.Build.0 = Corsair.Debug|Any CPU
 		{C7621369-054E-4FA6-A83B-61407480C2D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7621369-054E-4FA6-A83B-61407480C2D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7621369-054E-4FA6-A83B-61407480C2D1}.Release|Any CPU.ActiveCfg = Release|Any CPU

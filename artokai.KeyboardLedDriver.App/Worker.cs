@@ -1,5 +1,4 @@
-﻿using Artokai.KeyboardLedDriver.Logitech;
-using KeyboardLedDriver.Common;
+﻿using KeyboardLedDriver.Common;
 using System;
 using System.Diagnostics;
 using System.Net.Http;

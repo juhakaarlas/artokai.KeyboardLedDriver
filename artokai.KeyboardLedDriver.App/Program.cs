@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.NetworkInformation;
+using KeyboarLedDriver.Corsair;
 using Microsoft.Extensions.Configuration;
 
 namespace Artokai.KeyboardLedDriver
@@ -19,7 +20,7 @@ namespace Artokai.KeyboardLedDriver
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
             NetworkChange.NetworkAddressChanged += NetworkAddressChanged;
 
-            using (var controller = new Logitech.LogitechLedController())
+            using (var controller = new CorsairLedController())
             {
                 worker = new Worker(controller);
                 worker.Run(); 

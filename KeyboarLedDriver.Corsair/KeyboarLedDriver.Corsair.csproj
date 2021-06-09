@@ -4,7 +4,13 @@
     <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;Corsair.Debug</Configurations>
   </PropertyGroup>
+
+
+    <ItemGroup>
+      <PackageReference Include="CUESDK.NET" Version="3.0.361.2" />
+    </ItemGroup>
 
 
   <ItemGroup>
