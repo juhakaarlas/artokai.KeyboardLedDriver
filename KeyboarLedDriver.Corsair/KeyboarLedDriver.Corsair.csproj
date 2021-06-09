@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj" />
+  </ItemGroup>
+
 </Project>

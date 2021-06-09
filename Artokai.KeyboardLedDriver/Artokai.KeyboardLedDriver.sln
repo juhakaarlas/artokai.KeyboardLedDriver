@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Common", "..\KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj", "{AC6B99B4-99F1-43E1-968E-8580274B9D1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artokai.KeyboardLedDriver", "..\KeyboardLedDriver.Logitech\Artokai.KeyboardLedDriver.csproj", "{862BEA9D-F47F-4390-994D-DA2C08D2113D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Logitech", "..\KeyboardLedDriver.Logitech\KeyboardLedDriver.Logitech.csproj", "{862BEA9D-F47F-4390-994D-DA2C08D2113D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboarLedDriver.Corsair", "..\KeyboarLedDriver.Corsair\KeyboarLedDriver.Corsair.csproj", "{322648B4-6263-4087-9A38-E2EB6091F192}"
 EndProject

@@ -2,7 +2,7 @@
 
 namespace KeyboarLedDriver.Corsair
 {
-    public class Class1
+    public class CorsairLedController
     {
     }
 }
