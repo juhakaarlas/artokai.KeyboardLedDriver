@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj" />
-    <ProjectReference Include="..\KeyboarLedDriver.Corsair\KeyboarLedDriver.Corsair.csproj" />
+    <ProjectReference Include="..\KeyboardLedDriver.Corsair\KeyboardLedDriver.Corsair.csproj" />
   </ItemGroup>
 
 </Project>

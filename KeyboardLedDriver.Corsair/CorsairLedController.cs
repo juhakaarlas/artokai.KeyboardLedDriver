@@ -2,7 +2,7 @@
 using KeyboardLedDriver.Common;
 using System;
 
-namespace KeyboarLedDriver.Corsair
+namespace KeyboardLedDriver.Corsair
 {
     public class CorsairLedController : ILedController, IDisposable
     {

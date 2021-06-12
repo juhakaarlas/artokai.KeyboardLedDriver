@@ -1,10 +1,10 @@
 using KeyboardLedDriver.Common;
-using KeyboarLedDriver.Corsair;
+using KeyboardLedDriver.Corsair;
 using Xunit;
 
 namespace KeyboardLedDriver.Corsair.Tests
 {
-    public class UnitTest1
+    public class CorsairDriverTests
     {
         [Fact]
         public void TrySetColorScheme()

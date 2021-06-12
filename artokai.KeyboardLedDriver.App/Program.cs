@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.NetworkInformation;
-using KeyboarLedDriver.Corsair;
+using KeyboardLedDriver.Corsair;
 using Microsoft.Extensions.Configuration;
 
 namespace Artokai.KeyboardLedDriver
