@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj" />
     <ProjectReference Include="..\KeyboardLedDriver.Corsair\KeyboardLedDriver.Corsair.csproj" />
+    <ProjectReference Include="..\KeyboardLedDriver.Spectral\KeyboardLedDriver.Spectral.csproj" />
   </ItemGroup>
 
 </Project>
