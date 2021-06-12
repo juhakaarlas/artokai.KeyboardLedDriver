@@ -46,16 +46,16 @@ namespace KeyboardLedDriver.Generic
 
             if (!showAlert)
             {
-                ledsToSet = new LedName[1] { LedName.Escape };
+                //ledsToSet = new LedName[1] { LedName.Escape };
                 color = Color.Chartreuse;
             }
             else
             {
-                ledsToSet = ALERT_KEYS;
+                //ledsToSet = ALERT_KEYS;
                 color = Color.OrangeRed;
             }
 
-            Led.SetColorForLeds(ledsToSet, color);
+            Led.SetColorForLeds(ALERT_KEYS, color);
         }
 
         public void ShutDown()
