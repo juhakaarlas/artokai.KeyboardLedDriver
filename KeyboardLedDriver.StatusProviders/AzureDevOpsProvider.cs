@@ -1,59 +1,96 @@
 ﻿using KeyboardLedDriver.Common;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace KeyboardLedDriver.StatusProviders
 {
-    //TODO: Add secrets manager instructions to README
-    public class AzureDevOpsProvider : IStatusProvider
+    /// <summary>
+    /// <para>Provides a service to monitor builds on Azure DevOps.</para>
+    /// <para>
+    /// TODO: Add secrets manager instructions to README
+    /// </para>
+    /// </summary>
+    public class AzureDevOpsProvider : IBuildStatusProvider
     {
+        /// <inheritdoc/>
         public event EventHandler<StatusChangedEventArgs> StatusChanged;
-
-        private bool _monitoring;
 
         private CancellationTokenSource _cts;
 
         private AzureDevOpsClient _client;
 
-        public List<string> BuildNames { get; private set; }
-
+        /// <summary>
+        /// Remember the outcome of the last query.
+        /// </summary>
         private bool _lastBuildStatus;
 
+        /// <summary>
+        /// The Azure DevOps project to monitor.
+        /// </summary>
+        public string Project { get; set; }
+
+        /// <summary>
+        /// A list of build names to monitor.
+        /// </summary>
+        public List<string> BuildNames { get; private set; }
+
+        /// <inheritdoc/>
+        public int PollingInterval { get; set; }
+
+        /// <inheritdoc/>
+        public bool IsMonitoring { get; private set; }
+
+
+        /// <summary>
+        /// Creates a new instance for monitoring an Azure DevOps project.
+        /// The <paramref name="devOpsOrg"/> and <paramref name="project"/> are the values
+        /// from the project URL: https://dev.azure.com/devOpsOrg/project
+        /// </summary>
+        /// <param name="devOpsOrg">The organization which contains the <paramref name="project"/></param>
+        /// <param name="project">The project name</param>
+        /// <param name="accessToken">Personal access token. This token must provide Read access to Builds.</param>
         public AzureDevOpsProvider(string devOpsOrg, string project, string accessToken)
         {
+            Project = project;
             BuildNames = new List<string>();
+            PollingInterval = 60;
             _client = new AzureDevOpsClient(devOpsOrg, project, accessToken);
         }
 
+        /// <inheritdoc/>
         public bool StartMonitoring()
         {
-            if (_monitoring) return true;
+            if (IsMonitoring) return true;
             _cts = new CancellationTokenSource();
-            new Task(async () => await Run()).Start();
-            return true;
+            new Task(async () => await Run(), _cts.Token).Start();
+            return IsMonitoring = true;
         }
 
+        /// <inheritdoc/>
         public bool StopMonitoring()
         {
             _cts?.Cancel();
-            _monitoring = false;
+            IsMonitoring = false;
             return true;
         }
 
         private async Task Run()
         {
+            if (PollingInterval == 0) return;
+
             while (!_cts.IsCancellationRequested)
             {
-                await Task.Delay(TimeSpan.FromSeconds(5), _cts.Token);
+                await Task.Delay(TimeSpan.FromSeconds(PollingInterval), _cts.Token);
                 OnTick();
             }
         }
 
         private async void OnTick()
         {
+            if (BuildNames.Count == 0) return;
+
             bool totalSuccess = true;
 
             foreach (var build in BuildNames)

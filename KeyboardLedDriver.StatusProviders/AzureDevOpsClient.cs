@@ -12,11 +12,17 @@ namespace KeyboardLedDriver.StatusProviders
     {
         private string _accessToken;
 
-        private string _org;
-
-        private string _project;
-
         private VssConnection _connection;
+
+        /// <summary>
+        /// The Azure DevOps organization name which was passed during creation.
+        /// </summary>
+        public string Organization { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the project name. The project must be within the given <see cref="Organization"/>
+        /// </summary>
+        public string Project { get; set; }
 
         /// <summary>
         /// Initializes the Azure DevOps REST API Client
@@ -27,13 +33,17 @@ namespace KeyboardLedDriver.StatusProviders
         public AzureDevOpsClient(string devOpsOrg, string project, string accessToken)
         {
             _accessToken = accessToken;
-            _org = devOpsOrg;
-            _project = project;
-            var orgUrl = new Uri($"https://dev.azure.com/{_org}");
+            Organization = devOpsOrg;
+            Project = project;
+            var orgUrl = new Uri($"https://dev.azure.com/{Organization}");
             _connection = new VssConnection(orgUrl, new VssBasicCredential("pat", _accessToken));
-
         }
 
+        /// <summary>
+        /// Returns the status of the latest build from pipeline <paramref name="buildName"/>.
+        /// </summary>
+        /// <param name="buildName">The name of the build pipeline in <see cref="Project"/> </param>
+        /// <returns>A <see cref="BuildQueryResult"/> containing information about the operation.</returns>
         public async Task<BuildQueryResult> GetBuildStatus(string buildName)
         {
             var operationResult = await GetLatestBuildResult(buildName);
@@ -41,18 +51,32 @@ namespace KeyboardLedDriver.StatusProviders
 
             if (operationResult.HasValue)
             {
-                status = TranslateBuildResult(operationResult);
+                status = MapBuildResult(operationResult);
             }
             
             return new BuildQueryResult()
             {
                 OperationCompleted = operationResult != null, BuildStatus = status
             };
-
-            //return (operationResult== TaskStatus.RanToCompletion, operationResult.Result == BuildResult.Succeeded);
         }
 
-        private static BuildStatus TranslateBuildResult(BuildResult? operationResult)
+        private async Task<BuildResult?> GetLatestBuildResult(string buildName)
+        {
+            var client = _connection.GetClient<BuildHttpClient>();
+            var buildDefinition = await client.GetDefinitionsAsync(project: Project, name: buildName, includeLatestBuilds: true);
+
+            if (buildDefinition == null || buildDefinition.Count == 0) return null;
+
+            var builds = await client.GetBuildsAsync(Project, new List<int>(){ buildDefinition.First().Id });
+
+            if (builds == null || builds.Count == 0) return null;
+
+            var latest = builds.OrderByDescending(b => b.FinishTime).First();
+            return latest.Result;
+        }
+
+        //TODO: Replace trivial mappings with Automapper
+        private static BuildStatus MapBuildResult(BuildResult? operationResult)
         {
             BuildStatus status;
 
@@ -74,36 +98,35 @@ namespace KeyboardLedDriver.StatusProviders
                     status = BuildStatus.Canceled;
                     break;
                 default:
-                    status = BuildStatus.None; 
+                    status = BuildStatus.None;
                     break;
             }
 
             return status;
         }
-
-        private async Task<BuildResult?> GetLatestBuildResult(string buildName)
-        {
-            var client = _connection.GetClient<BuildHttpClient>();
-            var buildDefinitions = await client.GetDefinitionsAsync(_project, buildName);
-
-            if (buildDefinitions == null || buildDefinitions.Count == 0) return null;
-
-            var builds = await client.GetBuildsAsync(_project, new List<int>(){ buildDefinitions.First().Id });
-
-            if (builds == null || builds.Count == 0) return null;
-
-            var latest = builds.OrderByDescending(b => b.FinishTime).First();
-            return latest.Result;
-        }
     }
 
+    /// <summary>
+    /// This DTO represents the result of a single build status query.
+    /// </summary>
     public class BuildQueryResult
     {
+        /// <summary>
+        /// <c>true</c> if the query operation finished successfully.
+        /// Otherwise <c>false</c>.
+        /// </summary>
         public bool OperationCompleted { get; set; }
 
+        /// <summary>
+        /// Returns one of the possible build states if <see cref="OperationCompleted"/> is <c>true</c>.
+        /// Otherwise defaults to <see cref="BuildStatus.None"/>
+        /// </summary>
         public BuildStatus BuildStatus { get; set; }
     }
 
+    /// <summary>
+    /// A generic representation of the most common completed build states present in various build systems.
+    /// </summary>
     public enum BuildStatus
     {
         None,
