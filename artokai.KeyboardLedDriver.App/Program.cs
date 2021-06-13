@@ -1,13 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Net.NetworkInformation;
+using Artokai.KeyboardLedDriver;
 using KeyboardLedDriver.Common;
-using KeyboardLedDriver.Corsair;
 using KeyboardLedDriver.Generic;
 using KeyboardLedDriver.StatusProviders;
-using Microsoft.Extensions.Configuration;
 
-namespace Artokai.KeyboardLedDriver
+namespace KeyboardLedDriver.App
 {
     class Program
     {

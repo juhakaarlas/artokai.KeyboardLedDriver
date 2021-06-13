@@ -2,7 +2,7 @@ using KeyboardLedDriver.Common;
 using KeyboardLedDriver.Corsair;
 using Xunit;
 
-namespace KeyboardLedDriver.Corsair.Tests
+namespace KeyboardLedDriver.Tests
 {
     public class CorsairDriverTests
     {

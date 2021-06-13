@@ -1,10 +1,9 @@
-﻿using System;
-using KeyboardLedDriver.Common;
+﻿using KeyboardLedDriver.Common;
 using KeyboardLedDriver.Generic;
-using Spectral;
+using System;
 using Xunit;
 
-namespace KeyboardLedDriver.Corsair.Tests
+namespace KeyboardLedDriver.Tests
 {
     public class SpectralFixture : IDisposable
     {

@@ -1,6 +1,6 @@
-﻿using System;
-using KeyboardLedDriver.StatusProviders;
+﻿using KeyboardLedDriver.StatusProviders;
 using KeyboardLedDriver.Tests.Helpers;
+using System;
 using Xunit;
 
 namespace KeyboardLedDriver.Tests
