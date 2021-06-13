@@ -1,0 +1,5 @@
+{
+  "DevOpsOrganization": "MyOrg",
+  "Project": "MyProject",
+  "AccessToken": "my_pat"
+}

@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Spectral"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.Corsair", "KeyboardLedDriver.Corsair\KeyboardLedDriver.Corsair.csproj", "{C23E4E71-B456-4CA5-B919-20E3E11C76BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardLedDriver.StatusProviders", "KeyboardLedDriver.StatusProviders\KeyboardLedDriver.StatusProviders.csproj", "{906EB946-31BF-4C8E-AE0A-4C58D654FF52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardLedDriver.StatusProviders", "KeyboardLedDriver.StatusProviders\KeyboardLedDriver.StatusProviders.csproj", "{906EB946-31BF-4C8E-AE0A-4C58D654FF52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

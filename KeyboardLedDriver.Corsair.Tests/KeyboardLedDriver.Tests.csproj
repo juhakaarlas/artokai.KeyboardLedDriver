@@ -1,10 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="test.config.dev" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="test.config.dev" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
@@ -19,6 +27,7 @@
     <ProjectReference Include="..\KeyboardLedDriver.Common\KeyboardLedDriver.Common.csproj" />
     <ProjectReference Include="..\KeyboardLedDriver.Corsair\KeyboardLedDriver.Corsair.csproj" />
     <ProjectReference Include="..\KeyboardLedDriver.Spectral\KeyboardLedDriver.Spectral.csproj" />
+    <ProjectReference Include="..\KeyboardLedDriver.StatusProviders\KeyboardLedDriver.StatusProviders.csproj" />
   </ItemGroup>
 
 </Project>

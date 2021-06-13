@@ -23,7 +23,7 @@ namespace KeyboardLedDriver.StatusProviders
         {
             if (_monitoring) return true;
             _cts = new CancellationTokenSource();
-            Run();
+            new Task(async () => await Run()).Start();
             return true;
         }
 
