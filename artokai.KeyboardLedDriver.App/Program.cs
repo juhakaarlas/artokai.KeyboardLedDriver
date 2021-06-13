@@ -12,6 +12,8 @@ namespace KeyboardLedDriver.App
 
         private static ILedController _controller;
 
+        private static IBuildStatusProvider _provider;
+
         static void Main(string[] args)
         {    
             //AppConfig.Configuration = new ConfigurationBuilder()
@@ -29,15 +31,15 @@ namespace KeyboardLedDriver.App
             //}
             _controller = new GenericLedController();
             _controller.Initialize();
-            
-            var provider = new AzureDevOpsProvider("MyOrg", "MyProject", "MyPAT");
-            provider.StatusChanged += Provider_StatusChanged;
-            provider.BuildNames.Add("MyBuildName");
 
-            provider.StartMonitoring();
+            _provider = new AzureDevOpsProvider("MyOrg", "MyProject", "MyPAT");
+            _provider.StatusChanged += Provider_StatusChanged;
+            _provider.BuildNames.Add("MyBuildName");
+
+            _provider.StartMonitoring();
             Console.Out.WriteLine("Monitoring - Press <Enter> to cancel.");
             Console.In.ReadLine();
-            provider.StopMonitoring();
+            _provider.StopMonitoring();
             _controller.ShutDown();
         }
 
@@ -53,7 +55,8 @@ namespace KeyboardLedDriver.App
 
         private static void OnProcessExit(object sender, EventArgs e)
         {
-            worker?.Stop();
+            _provider?.StopMonitoring();
+            _controller?.ShutDown();
         }
     }
 }
