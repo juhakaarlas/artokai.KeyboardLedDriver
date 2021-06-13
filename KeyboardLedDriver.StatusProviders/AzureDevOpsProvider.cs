@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using KeyboardLedDriver.Common;
 
 namespace KeyboardLedDriver.StatusProviders
 {
+    //TODO: Add secrets manager instructions to README
     public class AzureDevOpsProvider : IStatusProvider
     {
         public event EventHandler<StatusChangedEventArgs> StatusChanged;
@@ -14,9 +16,16 @@ namespace KeyboardLedDriver.StatusProviders
 
         private CancellationTokenSource _cts;
 
-        public AzureDevOpsProvider()
-        {
+        private AzureDevOpsClient _client;
 
+        public List<string> BuildNames { get; private set; }
+
+        private bool _lastBuildStatus;
+
+        public AzureDevOpsProvider(string devOpsOrg, string project, string accessToken)
+        {
+            BuildNames = new List<string>();
+            _client = new AzureDevOpsClient(devOpsOrg, project, accessToken);
         }
 
         public bool StartMonitoring()
@@ -43,11 +52,21 @@ namespace KeyboardLedDriver.StatusProviders
             }
         }
 
-        private bool lasterror = false;
-        private void OnTick()
+        private async void OnTick()
         {
-            lasterror = !lasterror;
-            StatusChanged?.Invoke(this, new StatusChangedEventArgs(){ IsErrorState = lasterror });
+            bool totalSuccess = true;
+
+            foreach (var build in BuildNames)
+            {
+                var result = await _client.GetBuildStatus(build);
+                totalSuccess &= result.OperationCompleted && result.BuildStatus == BuildStatus.Succeeded;
+            }
+
+            if (_lastBuildStatus != totalSuccess)
+            {
+                _lastBuildStatus = totalSuccess;
+                StatusChanged?.Invoke(this, new StatusChangedEventArgs() { IsErrorState = !_lastBuildStatus });
+            }
         }
     }
 }

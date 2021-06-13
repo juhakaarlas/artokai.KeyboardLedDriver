@@ -33,11 +33,12 @@ namespace Artokai.KeyboardLedDriver
             _controller = new GenericLedController();
             _controller.Initialize();
             
-            IStatusProvider provider = new AzureDevOpsProvider();
+            var provider = new AzureDevOpsProvider("MyOrg", "MyProject", "MyPAT");
             provider.StatusChanged += Provider_StatusChanged;
+            provider.BuildNames.Add("MyBuildName");
 
             provider.StartMonitoring();
-            Console.Out.WriteLine("Monitoring...press Enter to cancel.");
+            Console.Out.WriteLine("Monitoring - Press <Enter> to cancel.");
             Console.In.ReadLine();
             provider.StopMonitoring();
             _controller.ShutDown();

@@ -1,20 +1,22 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace KeyboardLedDriver.Corsair.Tests.Helpers
+namespace KeyboardLedDriver.Tests.Helpers
 {
     public class Configuration
     {
         private static Configuration _instance;
         private readonly Dictionary<string, string> _properties;
-        public string EnvironmentName { get; }
+
+        private IConfiguration _secretConfig;
 
         private Configuration()
         {
-            EnvironmentName = Environment.GetEnvironmentVariable("EnvironmentName") ?? "dev";
+            var builder = new ConfigurationBuilder().AddUserSecrets<Configuration>();
+            _secretConfig = builder.Build();
             var data = ReadConfig(GetConfigFile());
             _properties = JsonConvert.DeserializeObject<Dictionary<string, string>>(data);
         }
@@ -25,7 +27,7 @@ namespace KeyboardLedDriver.Corsair.Tests.Helpers
         
         public string Project => _properties["Project"];
 
-        public string AccessToken => _properties["AccessToken"];
+        public string AccessToken => _secretConfig["AzDevOps:PAT"];
         
         private string ReadConfig(string file)
         {
@@ -43,7 +45,7 @@ namespace KeyboardLedDriver.Corsair.Tests.Helpers
 
         private string GetConfigFile()
         {
-            return "test.config." + (EnvironmentName == "dev" ? "dev" : "env");
+            return "test.config.dev";
         }
     }
 }

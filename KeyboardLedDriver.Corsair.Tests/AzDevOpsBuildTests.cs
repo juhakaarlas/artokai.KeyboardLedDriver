@@ -1,6 +1,6 @@
 ﻿using System;
-using KeyboardLedDriver.Corsair.Tests.Helpers;
 using KeyboardLedDriver.StatusProviders;
+using KeyboardLedDriver.Tests.Helpers;
 using Xunit;
 
 namespace KeyboardLedDriver.Tests
