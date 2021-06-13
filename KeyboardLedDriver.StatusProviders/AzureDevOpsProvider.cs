@@ -29,7 +29,7 @@ namespace KeyboardLedDriver.StatusProviders
         /// <summary>
         /// The Azure DevOps project to monitor.
         /// </summary>
-        public string Project { get; set; }
+        public string Project { get => _client.Project; set => _client.Project = value; }
 
         /// <summary>
         /// A list of build names to monitor.

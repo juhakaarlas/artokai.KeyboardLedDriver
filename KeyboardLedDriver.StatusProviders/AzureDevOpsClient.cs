@@ -46,6 +46,11 @@ namespace KeyboardLedDriver.StatusProviders
         /// <returns>A <see cref="BuildQueryResult"/> containing information about the operation.</returns>
         public async Task<BuildQueryResult> GetBuildStatus(string buildName)
         {
+            if (string.IsNullOrEmpty(Project) || string.IsNullOrEmpty(buildName))
+            {
+                return new BuildQueryResult() { OperationCompleted = false, BuildStatus = BuildStatus.None };
+            }
+
             var operationResult = await GetLatestBuildResult(buildName);
             BuildStatus status = BuildStatus.None;
 
