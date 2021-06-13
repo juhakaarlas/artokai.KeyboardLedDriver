@@ -1,7 +1,9 @@
 # Artokai.KeyboardLedDriver
 
+## This fork is a work in progress - and so is this README
+
 Keyboard Led Driver is a Windows C# application which runs in the background and changes your 
-Logitech RGB keyboard colours based on the status of your VPN connection and by
+RGB keyboard colours based on the status of your VPN connection and by
 polling the status of your build / system monitors.
 
 ![Keyboard leds in use](docs/keyboard.png)
