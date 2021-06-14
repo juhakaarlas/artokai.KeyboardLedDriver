@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using Artokai.KeyboardLedDriver;
 using KeyboardLedDriver.Common;
-using KeyboardLedDriver.Generic;
+using KeyboardLedDriver.Spectral;
 using KeyboardLedDriver.StatusProviders;
 using Microsoft.Extensions.Configuration;
 
@@ -30,6 +30,7 @@ namespace KeyboardLedDriver.App
 
             try
             {
+                _controller.SetColorScheme(null, false);
                 _provider.StartMonitoring();
             }
             catch (Exception e)

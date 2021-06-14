@@ -3,11 +3,11 @@ using System.Drawing;
 using KeyboardLedDriver.Common;
 using Spectral;
 
-namespace KeyboardLedDriver.Generic
+namespace KeyboardLedDriver.Spectral
 {
     public class GenericLedController : ILedController
     {
-        private readonly LedName[] ALERT_KEYS =
+        private readonly LedName[] _alertKeys =
         {
             LedName.Escape,
             LedName.F1,
@@ -41,21 +41,20 @@ namespace KeyboardLedDriver.Generic
         {
             if (!IsInitialized) return;
 
-            LedName[] ledsToSet;
             Color color;
 
             if (!showAlert)
             {
                 //ledsToSet = new LedName[1] { LedName.Escape };
-                color = Color.Chartreuse;
+                color = Color.Green;
             }
             else
             {
                 //ledsToSet = ALERT_KEYS;
-                color = Color.OrangeRed;
+                color = Color.Red;
             }
 
-            Led.SetColorForLeds(ALERT_KEYS, color);
+            Led.SetColorForLeds(_alertKeys, color);
         }
 
         public void ShutDown()
