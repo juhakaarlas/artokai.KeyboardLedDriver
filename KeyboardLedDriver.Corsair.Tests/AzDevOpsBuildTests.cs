@@ -17,6 +17,8 @@ namespace KeyboardLedDriver.Tests
 
         private readonly string _project = Configuration.Instance.Project;
 
+        private readonly string _pipeline = Configuration.Instance.Pipeline;
+
         private readonly string _token = Configuration.Instance.AccessToken;
 
         [Fact]
@@ -24,7 +26,7 @@ namespace KeyboardLedDriver.Tests
         {
             var testee = new AzureDevOpsClient(_org, _project, _token);
 
-            var result =  await testee.GetBuildStatus("My_Build");
+            var result =  await testee.GetBuildStatus(_pipeline);
 
             Assert.True(result.OperationCompleted);
             Assert.Equal(BuildStatus.Succeeded, result.BuildStatus);

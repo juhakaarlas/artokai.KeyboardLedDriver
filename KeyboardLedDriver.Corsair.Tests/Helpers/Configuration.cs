@@ -27,6 +27,8 @@ namespace KeyboardLedDriver.Tests.Helpers
         
         public string Project => _properties["Project"];
 
+        public string Pipeline => _properties["Pipeline"];
+
         public string AccessToken => _secretConfig["AzDevOps:PAT"];
         
         private string ReadConfig(string file)

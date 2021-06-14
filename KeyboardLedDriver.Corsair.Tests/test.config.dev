@@ -1,5 +1,6 @@
 {
   "DevOpsOrganization": "MyOrg",
   "Project": "MyProject",
+  "Pipeline": "My_BuildDefinition",
   "AccessToken": "my_pat"
 }
