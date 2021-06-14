@@ -1,42 +1,42 @@
 ﻿using System;
+using System.Configuration;
+using System.IO;
 using Artokai.KeyboardLedDriver;
 using KeyboardLedDriver.Common;
 using KeyboardLedDriver.Generic;
 using KeyboardLedDriver.StatusProviders;
+using Microsoft.Extensions.Configuration;
 
 namespace KeyboardLedDriver.App
 {
     class Program
     {
-        private static Worker worker;
-
         private static ILedController _controller;
 
         private static IBuildStatusProvider _provider;
 
         static void Main(string[] args)
-        {    
-            //AppConfig.Configuration = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("appsettings.json", true, false)
-            //    .Build();
+        {
+            var devOpsConfig = AppConfig.Instance.AzDevOpsConfig;
 
-            //AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
-            //NetworkChange.NetworkAddressChanged += NetworkAddressChanged;
-
-            //using (var controller = new CorsairLedController())
-            //{
-            //    worker = new Worker(controller);
-            //    worker.Run(); 
-            //}
+             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
+            
             _controller = new GenericLedController();
             _controller.Initialize();
 
-            _provider = new AzureDevOpsProvider("MyOrg", "MyProject", "MyPAT");
+            _provider = new AzureDevOpsProvider(devOpsConfig.DevOpsOrganization, devOpsConfig.Project, devOpsConfig.AccessToken);
             _provider.StatusChanged += Provider_StatusChanged;
-            _provider.BuildNames.Add("MyBuildName");
+            _provider.BuildNames.AddRange(devOpsConfig.Pipelines);
 
-            _provider.StartMonitoring();
+            try
+            {
+                _provider.StartMonitoring();
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.Message);
+            }
+
             Console.Out.WriteLine("Monitoring - Press <Enter> to cancel.");
             Console.In.ReadLine();
             _provider.StopMonitoring();
@@ -50,7 +50,7 @@ namespace KeyboardLedDriver.App
 
         private static void NetworkAddressChanged(object sender, EventArgs e)
         {
-            worker?.QueueNetworkCheck();
+            
         }
 
         private static void OnProcessExit(object sender, EventArgs e)

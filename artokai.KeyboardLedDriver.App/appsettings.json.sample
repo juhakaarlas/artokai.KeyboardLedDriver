@@ -3,5 +3,12 @@
     "enabled": true,
     "interval": 10,
     "url": "<url of the azure function>"
-  }
+  },
+
+  "AzureDevOpsConfig": {
+    "DevOpsOrganization": "MyOrg",
+    "Project": "MyProject",
+    "Interval": 60,
+    "Pipelines": [ "MyBuildDefinition", "MyOtherBuildDefinition" ] 
+  } 
 }

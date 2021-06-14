@@ -4,12 +4,14 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <Configurations>Debug;Release;Corsair.Debug</Configurations>
+    <UserSecretsId>00f44bd6-ddf3-4475-a5c0-e43097220e9a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +19,12 @@
     <ProjectReference Include="..\KeyboardLedDriver.Corsair\KeyboardLedDriver.Corsair.csproj" />
     <ProjectReference Include="..\KeyboardLedDriver.Spectral\KeyboardLedDriver.Spectral.csproj" />
     <ProjectReference Include="..\KeyboardLedDriver.StatusProviders\KeyboardLedDriver.StatusProviders.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
