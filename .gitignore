@@ -15,3 +15,4 @@ LogitechGSDK.cs
 appsettings.json
 PublishProfiles/
 *.pubxml
+KeyboardLedDriver.Corsair.Tests/test.config.local.json
