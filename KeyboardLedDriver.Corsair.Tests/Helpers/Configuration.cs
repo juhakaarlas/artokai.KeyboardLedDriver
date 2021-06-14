@@ -47,7 +47,7 @@ namespace KeyboardLedDriver.Tests.Helpers
 
         private string GetConfigFile()
         {
-            return "test.config.dev";
+            return "test.config.json";
         }
     }
 }
