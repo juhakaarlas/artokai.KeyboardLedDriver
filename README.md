@@ -17,16 +17,11 @@ a list of build definitions on Azure DevOps. Depending on the state of the build
 of your function key LEDs accordingly.
 
 ### Network and Azure table storage functionality disabled during refactoring
-The original app was also listening to network changes. I intend to restore this functionality once the provider
-refactoring is complete.
-
-It listens to network changes 
-and polls the Azure functions for possible status updates and colors your keyboard leds accordingly.
+The original app was also listening to network changes and subscribing to updates on Azure table storage. For the time being this functionality has been disabled. I intend to restore this functionality once the provider refactoring is complete.
 
 ### Prerequisites
 
 Old prerequites have been removed. Restoring nuget packets now takes care of all dependencies.
-
 
 To run the application you need to add a valid `appsettings.json` file to the project root. Check the `appsettings.json.sample`
 for configuration examples.
@@ -37,7 +32,7 @@ Execute the following command in the KeyboardLedDriver.App directory:
 ```
 dotnet user-secrets set "AzDevOpsPat" "<your_token>"
 ```
-Another way to do this is to right clicke the project name and select "Manage User Secrets". This will open a `secrets.json` file
+Another way to do this is to right click the project name and select "Manage User Secrets". This will open a `secrets.json` file
 which you can edit:
 ```
 {
