@@ -12,7 +12,7 @@ namespace Artokai.KeyboardLedDriver
     {
         private CancellationTokenSource cts;
         private DateTimeOffset LastNetworkCheck = DateTimeOffset.MinValue;
-        private ErrorPollingConfig ErrorPollingConfig = AppConfig.GetSection<ErrorPollingConfig>();
+        //private ErrorPollingConfig ErrorPollingConfig = AppConfig.GetSection<ErrorPollingConfig>();
         private DateTimeOffset LastErrorCheck = DateTimeOffset.MinValue;
         private readonly HttpClient ErrorCheckClient = new HttpClient();
         public bool IsRunning { get; private set; }
@@ -91,36 +91,36 @@ namespace Artokai.KeyboardLedDriver
             }
 
             // Check for alerts
-            if (ErrorPollingConfig.Enabled && !string.IsNullOrEmpty(ErrorPollingConfig.Url))
-            {
-                if ((DateTimeOffset.Now - LastErrorCheck).TotalSeconds > ErrorPollingConfig.Interval * 60)
-                {
-                    CheckForErrors();
-                }
-            }
+            //if (ErrorPollingConfig.Enabled && !string.IsNullOrEmpty(ErrorPollingConfig.Url))
+            //{
+            //    if ((DateTimeOffset.Now - LastErrorCheck).TotalSeconds > ErrorPollingConfig.Interval * 60)
+            //    {
+            //        CheckForErrors();
+            //    }
+            //}
         }
 
         private void CheckForErrors()
         {
             try
             {
-                LastErrorCheck = DateTimeOffset.Now;
+                //LastErrorCheck = DateTimeOffset.Now;
 
-                var reqTask = ErrorCheckClient.GetAsync(ErrorPollingConfig.Url);
-                reqTask.Wait(cts.Token);
-                if (!reqTask.IsCompletedSuccessfully)
-                    return;
+                //var reqTask = ErrorCheckClient.GetAsync(ErrorPollingConfig.Url);
+                //reqTask.Wait(cts.Token);
+                //if (!reqTask.IsCompletedSuccessfully)
+                //    return;
 
-                var response = reqTask.Result;
-                response.EnsureSuccessStatusCode();
-                var rdrTask = response.Content.ReadAsStringAsync();
-                rdrTask.Wait(cts.Token);
-                if (!rdrTask.IsCompletedSuccessfully)
-                    return;
+                //var response = reqTask.Result;
+                //response.EnsureSuccessStatusCode();
+                //var rdrTask = response.Content.ReadAsStringAsync();
+                //rdrTask.Wait(cts.Token);
+                //if (!rdrTask.IsCompletedSuccessfully)
+                //    return;
 
-                var content = rdrTask.Result;
-                var responseObj = JsonSerializer.Deserialize<ErrorPollingResponse>(content);
-                ShowAlert = (responseObj.Status?.ToLower() != "ok");
+                //var content = rdrTask.Result;
+                //var responseObj = JsonSerializer.Deserialize<ErrorPollingResponse>(content);
+                //ShowAlert = (responseObj.Status?.ToLower() != "ok");
             } catch {
                 // no-op
             }
