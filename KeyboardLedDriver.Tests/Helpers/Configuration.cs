@@ -30,7 +30,7 @@ namespace KeyboardLedDriver.Tests.Helpers
 
         public string Pipeline => _properties["Pipeline"];
 
-        public string AccessToken => _secretConfig["AzDevOps:PAT"];
+        public string AccessToken => _secretConfig["AzDevOpsPat"];
         
         private string ReadConfig(string file)
         {
