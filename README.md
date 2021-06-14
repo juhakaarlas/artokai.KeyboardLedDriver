@@ -31,7 +31,7 @@ Old prerequites have been removed. Restoring nuget packets now takes care of all
 To run the application you need to add a valid `appsettings.json` file to the project root. Check the `appsettings.json.sample`
 for configuration examples.
 
-If you want to use Azure DevOps as a build source, you need to add a Personal Access Token (PAT) to your local user secrets.
+If you want to use Azure DevOps as a build source, you need to add a [Personal Access Token (PAT)](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate) to your local user secrets.
 Execute the following command in the KeyboardLedDriver.App directory:
 
 ```
@@ -46,7 +46,7 @@ which you can edit:
 ```
 The secrets file is stored locally and will not end up in Git.
 
-
+You need to add the PAT to the test project in the same way if you want to execute the test(s) in the `KeyboardLedDriver.Tests/AzDevOpsBuildTests.cs` file.
 
 
 ### Build the project
