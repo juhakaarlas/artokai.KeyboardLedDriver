@@ -65,19 +65,14 @@ namespace KeyboardLedDriver.StatusProviders
             };
         }
 
-        private async Task<BuildResult?> GetLatestBuildResult(string buildName)
+        private async Task<BuildResult?> GetLatestBuildResult(string definitionName)
         {
             var client = _connection.GetClient<BuildHttpClient>();
-            var buildDefinition = await client.GetDefinitionsAsync(project: Project, name: buildName, includeLatestBuilds: true);
+            var buildDefinitions = await client.GetDefinitionsAsync(project: Project, name: definitionName, includeLatestBuilds: true);
 
-            if (buildDefinition == null || buildDefinition.Count == 0) return null;
+            if (buildDefinitions == null || buildDefinitions.Count == 0) return null;
 
-            var builds = await client.GetBuildsAsync(Project, new List<int>(){ buildDefinition.First().Id });
-
-            if (builds == null || builds.Count == 0) return null;
-
-            var latest = builds.OrderByDescending(b => b.FinishTime).First();
-            return latest.Result;
+            return  buildDefinitions.First().LatestCompletedBuild?.Result;
         }
 
         //TODO: Replace trivial mappings with Automapper
