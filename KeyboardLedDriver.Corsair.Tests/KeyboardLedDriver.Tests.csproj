@@ -5,6 +5,9 @@
 
     <IsPackable>false</IsPackable>
     <UserSecretsId>16f0648f-636c-4f3c-bae6-312e53133a8d</UserSecretsId>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
 

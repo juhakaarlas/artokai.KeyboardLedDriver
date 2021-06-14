@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 
@@ -34,7 +35,13 @@ namespace KeyboardLedDriver.Tests.Helpers
         private string ReadConfig(string file)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = $"{assembly.GetName().Name}.{file}";
+            var resourceName = $"{assembly.GetName().Name}.{file}.json";
+            var localResourceName = $"{assembly.GetName().Name}.{file}.local.json";
+
+            if (assembly.GetManifestResourceNames().Contains(localResourceName))
+            {
+                resourceName = localResourceName;
+            }
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             {
@@ -47,7 +54,7 @@ namespace KeyboardLedDriver.Tests.Helpers
 
         private string GetConfigFile()
         {
-            return "test.config.json";
+            return "test.config";
         }
     }
 }
