@@ -6,26 +6,48 @@ Keyboard Led Driver is a Windows C# application which runs in the background and
 RGB keyboard colours based on the status of your VPN connection and by
 polling the status of your build / system monitors.
 
-![Keyboard leds in use](docs/keyboard.png)
+Supported RGB keyboard vendors are Corsair and Logitech.
 
-Since some of the services, whose status you might want to poll might be behind firewalls,
-the communication is done via Azure Functions. The services post their statuses to
-Azure Table Storage via Azure Functions from where the application running on your computer
-periodically polls them.
+![Keyboard leds in use](docs/keyboard.png)
 
 ## Keyboard Led Driver
 
-Keyboard Led Driver is the application which runs on your local machine. It listens to network changes 
+KeyboardLedDriver.App is the application which runs on your local machine. It can be configured to monitor
+a list of build definitions on Azure DevOps. Depending on the state of the builds, it will change the colors
+of your function key LEDs accordingly.
+
+### Network and Azure table storage functionality disabled during refactoring
+The original app was also listening to network changes. I intend to restore this functionality once the provider
+refactoring is complete.
+
+It listens to network changes 
 and polls the Azure functions for possible status updates and colors your keyboard leds accordingly.
 
 ### Prerequisites
 
-Before you can build the project, you need to download the Logitech SDK and add a couple of files to the project:
+Old prerequites have been removed. Restoring nuget packets now takes care of all dependencies.
 
-1. Download the Logitech's LED ILLUMINATION SDK from their website
-2. Copy the files `LogitechLedEnginesWrapper.dll` and `LogitechGSDK.cs` from the SDK to the project directory. 
 
-You also need to add a valid `appsettings.json` file to the project root. This file contains the url address of the Azure Function from where the application periodically polls for error statuses which control the colour of the function keys. If you haven't set up the Azure Functions yet, you can also set the `enabled` setting to `false` and leave the url empty.
+To run the application you need to add a valid `appsettings.json` file to the project root. Check the `appsettings.json.sample`
+for configuration examples.
+
+If you want to use Azure DevOps as a build source, you need to add a Personal Access Token (PAT) to your local user secrets.
+Execute the following command in the KeyboardLedDriver.App directory:
+
+```
+dotnet user-secrets set "AzDevOpsPat" "<your_token>"
+```
+Another way to do this is to right clicke the project name and select "Manage User Secrets". This will open a `secrets.json` file
+which you can edit:
+```
+{
+  "AzDevOpsPat": "<your_token>"
+}
+```
+The secrets file is stored locally and will not end up in Git.
+
+
+
 
 ### Build the project
 
@@ -41,7 +63,15 @@ dotnet build --configuration Release
 1. Navigate to Windows Startup foler (`Windows + R` + `shell:startup` + `Ok`)
 2. Add a shortcut to `Artokai.KeyboardLedDriver.exe`
 
-## Azure functions
+## Azure functions - this section is currently not applicable
+
+Since some of the services, whose status you might want to poll might be behind firewalls,
+the communication is done via Azure Functions. The services post their statuses to
+Azure Table Storage via Azure Functions from where the application running on your computer
+periodically polls them.
+
+### Azure Function
+Function from where the application periodically polls for error statuses which control the colour of the function keys. If you haven't set up the Azure Functions yet, you can also set the `enabled` setting to `false` and leave the url empty.
 
 The colour of your function keys are controlled by Azure Functions. 
 You can configure your build jobs and system status monitors to 

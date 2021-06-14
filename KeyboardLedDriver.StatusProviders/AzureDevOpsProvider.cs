@@ -8,9 +8,6 @@ namespace KeyboardLedDriver.StatusProviders
 {
     /// <summary>
     /// <para>Provides a service to monitor builds on Azure DevOps.</para>
-    /// <para>
-    /// TODO: Add secrets manager instructions to README
-    /// </para>
     /// </summary>
     public class AzureDevOpsProvider : IBuildStatusProvider
     {
