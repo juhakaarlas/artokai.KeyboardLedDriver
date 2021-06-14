@@ -24,7 +24,7 @@ namespace KeyboardLedDriver.StatusProviders
         /// <summary>
         /// Remember the outcome of the last query.
         /// </summary>
-        private bool _lastBuildStatus;
+        private bool _lastBuildStatus = true;
 
         /// <summary>
         /// The Azure DevOps project to monitor.
@@ -53,10 +53,10 @@ namespace KeyboardLedDriver.StatusProviders
         /// <param name="accessToken">Personal access token. This token must provide Read access to Builds.</param>
         public AzureDevOpsProvider(string devOpsOrg, string project, string accessToken)
         {
+            _client = new AzureDevOpsClient(devOpsOrg, project, accessToken);
             Project = project;
             BuildNames = new List<string>();
             PollingInterval = 60;
-            _client = new AzureDevOpsClient(devOpsOrg, project, accessToken);
         }
 
         /// <inheritdoc/>
@@ -64,7 +64,9 @@ namespace KeyboardLedDriver.StatusProviders
         {
             if (IsMonitoring) return true;
             _cts = new CancellationTokenSource();
-            new Task(async () => await Run(), _cts.Token).Start();
+
+            Run().ConfigureAwait(false);
+
             return IsMonitoring = true;
         }
 
@@ -82,12 +84,12 @@ namespace KeyboardLedDriver.StatusProviders
 
             while (!_cts.IsCancellationRequested)
             {
+                await OnTick();
                 await Task.Delay(TimeSpan.FromSeconds(PollingInterval), _cts.Token);
-                OnTick();
             }
         }
 
-        private async void OnTick()
+        private async Task OnTick()
         {
             if (BuildNames.Count == 0) return;
 
