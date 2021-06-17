@@ -18,7 +18,7 @@ namespace KeyboardLedDriver.Tests
             //Arrange
             var testee = new NetworkStatusProvider();
             //Change the name of the interface to something on your own computer
-            testee.Interfaces.Add("USB-C Ethernet");
+            testee.Interfaces.Add("Pulse Secure");
             testee.PollingInterval = 5;
             var receivedEvent = Assert.Raises<StatusChangedEventArgs>(handler => testee.StatusChanged += handler,
                 handler => testee.StatusChanged -= handler, () => testee.StartMonitoring());
