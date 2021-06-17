@@ -15,17 +15,20 @@ namespace KeyboardLedDriver.Tests
         [Fact]
         public void CanReadNetworkInterfaces()
         {
+            //Arrange
             var testee = new NetworkStatusProvider();
+            //Change the name of the interface to something on your own computer
             testee.Interfaces.Add("USB-C Ethernet");
             testee.PollingInterval = 5;
-
             var receivedEvent = Assert.Raises<StatusChangedEventArgs>(handler => testee.StatusChanged += handler,
                 handler => testee.StatusChanged -= handler, () => testee.StartMonitoring());
 
+            //Act
             bool up = testee.IsUp;
             testee.StopMonitoring();
-            Assert.True(up);
 
+            //Assert
+            Assert.True(up);
             Assert.False(receivedEvent.Arguments.IsErrorState);
         }
     }
