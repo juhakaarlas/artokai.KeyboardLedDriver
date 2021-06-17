@@ -25,6 +25,7 @@ namespace KeyboardLedDriver.App
             _controller.Initialize();
 
             _provider = new AzureDevOpsProvider(devOpsConfig.DevOpsOrganization, devOpsConfig.Project, devOpsConfig.AccessToken);
+            _provider.PollingInterval = devOpsConfig.Interval;
             _provider.StatusChanged += Provider_StatusChanged;
             _provider.BuildNames.AddRange(devOpsConfig.Pipelines);
 
