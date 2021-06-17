@@ -103,6 +103,7 @@ namespace KeyboardLedDriver.StatusProviders
         public bool StopMonitoring()
         {
             NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAvailabilityChanged;
+            NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
             _cts.Cancel();
 
             return IsMonitoring = false;
