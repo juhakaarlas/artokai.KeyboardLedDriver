@@ -26,7 +26,9 @@ namespace KeyboardLedDriver.Spectral
             LedName.ScrollLock,
             LedName.Pause
         };
+
         public bool CurrentAlertState { get; }
+
         public ColorScheme CurrentColorScheme { get; }
         
         public bool IsInitialized { get; private set; }

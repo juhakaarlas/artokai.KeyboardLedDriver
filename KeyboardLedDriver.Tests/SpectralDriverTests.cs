@@ -1,5 +1,5 @@
 ﻿using KeyboardLedDriver.Common;
-using KeyboardLedDriver.Generic;
+using KeyboardLedDriver.Spectral;
 using System;
 using Xunit;
 
