@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KeyboardLedDriver.Common
 {
@@ -34,21 +35,5 @@ namespace KeyboardLedDriver.Common
         /// Returns <c>true</c> if the new state is an error state
         /// </summary>
         public bool IsErrorState { get; set; }
-    }
-
-    /// <summary>
-    /// Specific interface for build status monitoring.
-    /// </summary>
-    public interface IBuildStatusProvider : IStatusProvider
-    {
-        /// <summary>
-        /// List of build definition names to monitor
-        /// </summary>
-        List<string> BuildNames { get;  }
-
-        /// <summary>
-        /// Build status polling interval in seconds
-        /// </summary>
-        public int PollingInterval { get; set; }
     }
 }
