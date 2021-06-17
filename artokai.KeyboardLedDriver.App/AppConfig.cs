@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using KeyboardLedDriver.App.Configs;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
@@ -56,25 +57,5 @@ namespace Artokai.KeyboardLedDriver
 
             return result;
         }
-    }
-
-    public class AzureDevOpsConfig
-    {
-        public string DevOpsOrganization { get; set; }
-        
-        public string  Project { get; set; }
-
-        public string AccessToken { get; set; }
-        
-        public int Interval { get; set; } = 60;
-
-        public List<string> Pipelines { get; set; }
-    }
-
-    public class ErrorPollingConfig
-    {
-        public bool Enabled { get; set; } = false;
-        public int Interval { get; set; } = 15;
-        public string Url { get; set; } = "";
     }
 }
