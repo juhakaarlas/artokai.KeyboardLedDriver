@@ -9,7 +9,7 @@ namespace KeyboardLedDriver.StatusProviders
     /// <summary>
     /// <para>Provides a service to monitor builds on Azure DevOps.</para>
     /// </summary>
-    public class AzureDevOpsProvider : IBuildStatusProvider
+    public class AzureDevOpsProvider : PollingProviderBase, IBuildStatusProvider
     {
         /// <inheritdoc/>
         public event EventHandler<StatusChangedEventArgs> StatusChanged;
@@ -34,11 +34,7 @@ namespace KeyboardLedDriver.StatusProviders
         public List<string> BuildNames { get; private set; }
 
         /// <inheritdoc/>
-        public int PollingInterval { get; set; }
-
-        /// <inheritdoc/>
         public bool IsMonitoring { get; private set; }
-
 
         /// <summary>
         /// Creates a new instance for monitoring an Azure DevOps project.
@@ -75,15 +71,17 @@ namespace KeyboardLedDriver.StatusProviders
             return true;
         }
 
-        private async Task Run()
+        private async Task<Task> Run()
         {
-            if (PollingInterval == 0) return;
+            if (PollingInterval <= 0) return Task.CompletedTask;
 
             while (!_cts.IsCancellationRequested)
             {
                 await OnTick();
                 await Task.Delay(TimeSpan.FromSeconds(PollingInterval), _cts.Token);
             }
+
+            return Task.CompletedTask;
         }
 
         private async Task OnTick()
