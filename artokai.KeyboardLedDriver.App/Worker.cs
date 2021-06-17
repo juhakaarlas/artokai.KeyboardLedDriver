@@ -126,10 +126,6 @@ namespace Artokai.KeyboardLedDriver
             }
         }
 
-        internal void QueueNetworkCheck()
-        {
-            LastNetworkCheck = DateTimeOffset.MinValue;
-        }
 
         public void Stop()
         {
