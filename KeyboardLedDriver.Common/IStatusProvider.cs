@@ -32,6 +32,11 @@ namespace KeyboardLedDriver.Common
     public class StatusChangedEventArgs : EventArgs
     {
         /// <summary>
+        /// Provides information about the source of the status change,
+        /// such as the name of a build or network interface.
+        /// </summary>
+        public string Source { get; set; }
+        /// <summary>
         /// Returns <c>true</c> if the new state is an error state
         /// </summary>
         public bool IsErrorState { get; set; }
