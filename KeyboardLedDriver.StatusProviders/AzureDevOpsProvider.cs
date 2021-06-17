@@ -57,7 +57,7 @@ namespace KeyboardLedDriver.StatusProviders
         {
             if (IsMonitoring) return true;
             _cts = new CancellationTokenSource();
-
+            
             Run().ConfigureAwait(false);
 
             return IsMonitoring = true;
@@ -89,17 +89,25 @@ namespace KeyboardLedDriver.StatusProviders
             if (BuildNames.Count == 0) return;
 
             bool totalSuccess = true;
+            List<string> failedBuilds = new List<string>();
 
             foreach (var build in BuildNames)
             {
                 var result = await _client.GetBuildStatus(build);
+
+                if (result.BuildStatus != BuildStatus.Succeeded) failedBuilds.Add(build);
+
                 totalSuccess &= result.OperationCompleted && result.BuildStatus == BuildStatus.Succeeded;
             }
 
             if (_lastBuildStatus != totalSuccess)
             {
                 _lastBuildStatus = totalSuccess;
-                StatusChanged?.Invoke(this, new StatusChangedEventArgs() { IsErrorState = !_lastBuildStatus });
+
+                foreach (var failedBuild in failedBuilds)
+                {
+                    StatusChanged?.Invoke(this, new StatusChangedEventArgs() { IsErrorState = true, Source = failedBuild});
+                }
             }
         }
     }

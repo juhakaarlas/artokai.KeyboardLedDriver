@@ -1,4 +1,8 @@
-﻿using KeyboardLedDriver.StatusProviders;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using KeyboardLedDriver.Common;
+using KeyboardLedDriver.StatusProviders;
 using KeyboardLedDriver.Tests.Helpers;
 using Xunit;
 
@@ -29,6 +33,25 @@ namespace KeyboardLedDriver.Tests
 
             Assert.True(result.OperationCompleted);
             Assert.Equal(BuildStatus.Succeeded, result.BuildStatus);
+        }
+
+        [Fact]
+        public void RaisesEventWithBuildName()
+        {
+            var testee = new AzureDevOpsProvider(_org, _project, _token);
+            testee.PollingInterval = 1;
+            testee.BuildNames.Add("Bogus");
+            testee.StartMonitoring();
+
+            var args = Assert.Raises<StatusChangedEventArgs>(handler => testee.StatusChanged += handler,
+                handler => testee.StatusChanged -= handler, () =>
+                {
+                    Thread.Sleep(1000);
+                });
+            testee.StopMonitoring();
+
+            Assert.Equal("Bogus", args.Arguments.Source);
+            Assert.True(args.Arguments.IsErrorState);
         }
     }
 }
