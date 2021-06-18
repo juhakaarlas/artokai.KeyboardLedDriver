@@ -13,5 +13,7 @@ namespace KeyboardLedDriver.App.Configs
         public int Interval { get; set; } = 60;
 
         public List<string> Pipelines { get; set; }
+
+        public Dictionary<string, KeyColorMapping> BuildKeyMap { get; set; }
     }
 }

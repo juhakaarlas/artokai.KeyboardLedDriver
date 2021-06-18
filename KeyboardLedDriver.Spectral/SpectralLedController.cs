@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.CompilerServices;
+using AutoMapper;
 using KeyboardLedDriver.Common;
 using Spectral;
 
@@ -7,7 +10,7 @@ namespace KeyboardLedDriver.Spectral
 {
     public class GenericLedController : ILedController
     {
-        private readonly LedName[] _alertKeys =
+        private readonly LedName[] _defaultAlertKeys =
         {
             LedName.Escape,
             LedName.F1,
@@ -27,11 +30,18 @@ namespace KeyboardLedDriver.Spectral
             LedName.Pause
         };
 
+        private Mapper _keyMapper;
+
         public bool CurrentAlertState { get; }
 
         public ColorScheme CurrentColorScheme { get; }
         
         public bool IsInitialized { get; private set; }
+
+        public GenericLedController()
+        {
+            CreateKeyMappings();
+        }
 
         public bool Initialize()
         {
@@ -47,16 +57,33 @@ namespace KeyboardLedDriver.Spectral
 
             if (!showAlert)
             {
-                //ledsToSet = new LedName[1] { LedName.Escape };
                 color = Color.Green;
             }
             else
             {
-                //ledsToSet = ALERT_KEYS;
                 color = Color.Red;
             }
 
-            Led.SetColorForLeds(_alertKeys, color);
+            Led.SetColorForLeds(_defaultAlertKeys, color);
+        }
+
+        public bool SetColorForKeys(ColorScheme color, List<string> keys)
+        {
+            if (keys == null) return false;
+
+            var ledsToSet = new List<LedName>();
+
+            foreach (var key in keys)
+            {
+                if (Enum.TryParse<LedName>(key, out var led))
+                {
+                    ledsToSet.Add(led);
+                }
+            }
+
+            if (ledsToSet.Count == 0) return false;
+            
+            return Led.SetColorForLeds(ledsToSet, color.R, color.G, color.B);
         }
 
         public void ShutDown()
@@ -67,6 +94,22 @@ namespace KeyboardLedDriver.Spectral
         public void ToggleAlert(bool alertState)
         {
             throw new NotImplementedException();
+        }
+
+        public LedName MapTest(string key)
+        {
+            return _keyMapper.Map<LedName>(key);
+        }
+
+        private void CreateKeyMappings()
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<string, LedName>()
+                .ConvertUsing((s => Enum.Parse<LedName>(s))));
+            _keyMapper = new Mapper(config);
+            
+                //.ForMember(dest => dest,
+                //o =>
+                //    o.MapFrom(src => src.Equals(o.ToString()))));
         }
     }
 }

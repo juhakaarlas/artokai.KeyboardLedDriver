@@ -1,6 +1,7 @@
 ﻿using Corsair.CUE.SDK;
 using KeyboardLedDriver.Common;
 using System;
+using System.Collections.Generic;
 
 namespace KeyboardLedDriver.Corsair
 {
@@ -105,6 +106,11 @@ namespace KeyboardLedDriver.Corsair
 
             CUESDK.CorsairSetLedsColorsBufferByDeviceIndex(0, colorSet.Length, colorSet);
             CUESDK.CorsairSetLedsColorsFlushBuffer();
+        }
+
+        public bool SetColorForKeys(ColorScheme color, List<string> keys)
+        {
+            throw new NotImplementedException();
         }
 
         public void ShutDown()

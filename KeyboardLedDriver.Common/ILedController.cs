@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KeyboardLedDriver.Common
 {
@@ -10,6 +11,8 @@ namespace KeyboardLedDriver.Common
 
         bool Initialize();
         void SetColorScheme(ColorScheme scheme, bool showAlert);
+        bool SetColorForKeys(ColorScheme color, List<string> keys);
+
         void ShutDown();
         void ToggleAlert(bool alertState);
     }
